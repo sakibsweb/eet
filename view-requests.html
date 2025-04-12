@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Requests</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Client Requests</h1>
+    <div id="requests"></div>
+    <script>
+        fetch('/api/requests')
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('requests');
+            if (data.length === 0) {
+                container.innerHTML = "<p>No requests yet.</p>";
+                return;
+            }
+            data.forEach((r, i) => {
+                container.innerHTML += `
+                    <div style="margin-bottom:20px;padding:10px;border:1px solid #ccc;">
+                        <strong>${r.clientName}</strong> (${r.email})<br>
+                        <b>Category:</b> ${r.category}<br>
+                        <b>Details:</b> ${r.details}<br>
+                        <b>Assigned Freelancer:</b> ${r.freelancer || 'Not Assigned'}<br>
+                        <form action="/assign-freelancer" method="POST">
+                            <input type="hidden" name="index" value="${i}">
+                            <input type="text" name="freelancer" placeholder="Assign Freelancer">
+                            <input type="text" name="status" placeholder="Status (e.g., In Progress)">
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

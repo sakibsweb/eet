@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request a Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Request a Service</h2>
+    <form action="/submit-request" method="POST">
+        <input type="text" name="clientName" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <select name="category" required>
+            <option value="">Select Category</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Digital Marketing">Digital Marketing</option>
+        </select><br><br>
+        <textarea name="details" placeholder="Describe your project..." rows="5" cols="30" required></textarea><br><br>
+        <button type="submit">Submit Request</button>
+    </form>
+</body>
+</html>
